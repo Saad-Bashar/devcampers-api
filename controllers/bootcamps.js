@@ -10,7 +10,8 @@ exports.getBootcamps = async (req, res, next) => {
       .status(200)
       .json({ success: true, data: bootcamps, count: bootcamps.length });
   } catch (error) {
-    res.status(400).json({ success: false });
+    // res.status(400).json({ success: false });
+    next(err);
   }
 };
 
@@ -27,7 +28,8 @@ exports.getBootcamp = async (req, res, next) => {
 
     return res.status(200).json({ success: true, data: bootcamp });
   } catch (error) {
-    return res.status(400).json({ success: false });
+    next(error);
+    // return res.status(400).json({ success: false });
   }
 };
 
