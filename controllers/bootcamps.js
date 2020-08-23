@@ -6,7 +6,7 @@ const ErorResponse = require("../utils/ErrorResponse");
 // @access Public
 exports.getBootcamps = async (req, res, next) => {
   try {
-    const bootcamps = await Bootcamp.find();
+    const bootcamps = await Bootcamp.find(req.query);
     res
       .status(200)
       .json({ success: true, data: bootcamps, count: bootcamps.length });
