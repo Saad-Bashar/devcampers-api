@@ -36,6 +36,27 @@ exports.getBootcamp = async (req, res, next) => {
   }
 };
 
+// @desc Get single bootcamps
+// @route GET /api/v1/bootcamps/:id
+// @access Public
+exports.getUserBootcamp = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const bootcamp = await Bootcamp.find({ user: userId });
+
+    if (!bootcamp) {
+      return next(
+        new ErorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
+      );
+    }
+
+    return res.status(200).json({ success: true, data: bootcamp });
+  } catch (error) {
+    next(error);
+    // return res.status(400).json({ success: false });
+  }
+};
+
 // @desc Create new bootcamp d
 // @route POST /api/v1/bootcamps
 // @access Private
