@@ -55,3 +55,15 @@ exports.login = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getMe = async (req, res, next) => {
+  try {
+    // user is already available in req due to the protect middleware
+    const user = req.user;
+
+    res.status(200).json({
+      success: true,
+      data: user,
+    });
+  } catch (error) {}
+};
